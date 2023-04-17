@@ -1,0 +1,10 @@
+.container-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: purple;
+  }
+
+.column {
+    width: 300px
+}
