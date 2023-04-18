@@ -1,4 +1,5 @@
-import './App.css';
+import './styles.css';
+import React, { useState } from 'react'
 import { SearchResults } from './SearchResults'
 import { SearchBar } from './SearchBar'
 import { Playlist } from './Playlist'
@@ -26,6 +27,7 @@ function App() {
 
   const responseData = getDataFromResponse(sampleResponse)
 
+  const [playlist, setPlaylist] = useState([])
 
   return (
     <div className="App">
@@ -34,11 +36,14 @@ function App() {
       </header>
       <main>
         <SearchBar />
-        <div class="container">
+        <div className="App-body">
           <SearchResults responseObject={responseData} />
-          <Playlist />
+          <Playlist playlistVideos={playlist}/>
         </div>
       </main>
+      <footer className="App-footer">
+        &nbsp;
+      </footer>
     </div>
   );
 }

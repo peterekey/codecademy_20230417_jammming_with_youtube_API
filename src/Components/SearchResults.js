@@ -1,18 +1,16 @@
 import { Tracklist } from './Tracklist'
-import './SearchResults.css'
+import './styles.css'
 
 export function SearchResults({responseObject}) {
 
     return (
-        <>
-            <div class="container-column">
-                <h2 class="column">Results</h2>
-                <div class="column">
-                    <Tracklist 
-                        videos={responseObject}
-                    />
-                </div>
+        <div className="column-container">
+            <h2>Results</h2>
+            <div>
+                <Tracklist 
+                    videos={responseObject}
+                />
             </div>
-        </>
+        </div>
     )
 }
