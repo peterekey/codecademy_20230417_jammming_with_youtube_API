@@ -6,7 +6,7 @@ export function SearchResults({responseObject}) {
     return (
         <div className="column-container">
             <h2>Results</h2>
-            <div>
+            <div className="SearchResults-container">
                 <Tracklist 
                     videos={responseObject}
                 />

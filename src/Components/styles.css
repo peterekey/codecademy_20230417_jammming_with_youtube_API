@@ -1,3 +1,33 @@
+/* CSS used by multiple components */
+
+.column-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 30rem;
+  align-items: center;
+}
+
+h2 {
+  color: white;
+}
+
+h3, h4 {
+  text-align: left;
+}
+
+.submit-button {
+  color: white;
+  background-color: purple;
+  font-size: 1.2rem;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
+}
+
+
+/* CSS used by one component */
+
 .App {
   text-align: center;
 }
@@ -25,15 +55,7 @@
   padding: 0 0 1rem 0;
 }
 
-.column-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 30rem;
-  align-items: center;
-}
-
-.Playlist-name {
+.Playlist-input {
   font-size: 1.5rem;
   font-weight: bold;
   border: none;
@@ -42,8 +64,29 @@
   color: black;
 }
 
+.Searchbar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.Searchbar-input {
+  font-size: 1.5rem;
+   margin: 0.5rem;
+   padding: 0.5rem;
+   min-width: 30rem;
+}
+
+.SearchResults-container {
+  background-color: rgb(225, 109, 220);
+
+}
+
 .Track-card-container {
   border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,8 +96,4 @@
 
 .Track-card-info {
   margin: 0 1rem 0 1rem;
-}
-
-h3, h4 {
-  text-align: left;
 }

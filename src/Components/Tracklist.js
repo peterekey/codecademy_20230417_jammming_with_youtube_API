@@ -10,6 +10,8 @@ export function Tracklist({videos}) {
             <Track 
                 videoTitle={video.videoTitle}
                 channelTitle={video.channelTitle}
+                videoId={video.videoLink}
+                imgUrl={video.thumbnail}
             />)
     })
 

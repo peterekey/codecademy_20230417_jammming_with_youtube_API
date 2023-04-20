@@ -1,9 +1,16 @@
 import './styles.css'
 
-export function Track({videoTitle, channelTitle}) {
+export function Track({videoTitle, channelTitle, videoId, imgUrl}) {
+
+    const addOrRemove = () => {
+        
+    }
 
     return (
         <div className="Track-card-container">
+            <div>
+                <img src={imgUrl} />
+            </div>
             <div className="Track-card-info">
                 <h3>{videoTitle}</h3>
                 <h4>{channelTitle}</h4>

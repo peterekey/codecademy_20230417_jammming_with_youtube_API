@@ -28,6 +28,14 @@ function App() {
   const responseData = getDataFromResponse(sampleResponse)
 
   const [playlist, setPlaylist] = useState([])
+  const [newVideo, setNewVideo] = useState({})
+
+  const handlePlaylistChange = ({target}) => {
+    const {value} = setNewVideo((prev) => ({
+      ...prev,
+      vidTitle: [value]
+    }))
+  }
 
   return (
     <div className="App">
@@ -37,7 +45,10 @@ function App() {
       <main>
         <SearchBar />
         <div className="App-body">
-          <SearchResults responseObject={responseData} />
+          <SearchResults 
+            responseObject={responseData} 
+            playlistChange={handlePlaylistChange}
+          />
           <Playlist playlistVideos={playlist}/>
         </div>
       </main>
