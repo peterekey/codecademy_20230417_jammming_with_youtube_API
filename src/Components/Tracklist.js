@@ -1,17 +1,15 @@
 import { Track } from './Track'
 
-export function Tracklist({videos}) {
-    console.log(videos)
+export function Tracklist(props) {
 
     const cards = []
 
-    videos.map(video => {
+    props.videos.map(video => {
+        console.log(video.thumbnail)
         cards.push(
             <Track 
-                videoTitle={video.videoTitle}
-                channelTitle={video.channelTitle}
-                videoId={video.videoLink}
-                imgUrl={video.thumbnail}
+                video={video}
+                addToPlaylist={props.handlePlaylistChange}
             />)
     })
 

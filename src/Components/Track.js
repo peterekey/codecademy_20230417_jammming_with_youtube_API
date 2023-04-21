@@ -1,22 +1,22 @@
 import './styles.css'
 
-export function Track({videoTitle, channelTitle, videoId, imgUrl}) {
+export function Track(props) {
 
-    const addOrRemove = () => {
-        
+    function addToPlaylist(theVid) {
+
     }
 
     return (
         <div className="Track-card-container">
             <div>
-                <img src={imgUrl} />
+                <img src={props.video.thumbnail} />
             </div>
             <div className="Track-card-info">
-                <h3>{videoTitle}</h3>
-                <h4>{channelTitle}</h4>
+                <h3>{props.video.videoTitle}</h3>
+                <h4>{props.video.channelTitle}</h4>
             </div>
             <div className="Track-card-info">
-                +
+                <a href="#" onClick={() => props.addToPlaylist(props.video)}>+</a>
             </div>
         </div>
     )

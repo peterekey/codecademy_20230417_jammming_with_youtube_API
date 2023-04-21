@@ -30,10 +30,28 @@ function App() {
   const [playlist, setPlaylist] = useState([])
   const [newVideo, setNewVideo] = useState({})
 
-  const handlePlaylistChange = ({target}) => {
-    const {value} = setNewVideo((prev) => ({
+  const handlePlaylistChange = ({channelTitle, thumbnail, videoLink, videoTitle}) => {
+    setNewVideo((prev) => ({
       ...prev,
-      vidTitle: [value]
+      channelTitle: channelTitle,
+      thumbnail: thumbnail,
+      videoTitle: videoTitle,
+      videoLink: videoLink
+    }))
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setPlaylist((playlist) => (
+      [newVideo, ...playlist]
+    ))
+
+    setNewVideo(() => ({
+      channelTitle: '',
+      thumbnail: '',
+      videoTitle: '',
+      videoLink: ''
     }))
   }
 
@@ -47,7 +65,7 @@ function App() {
         <div className="App-body">
           <SearchResults 
             responseObject={responseData} 
-            playlistChange={handlePlaylistChange}
+            handlePlaylistChange={handlePlaylistChange}
           />
           <Playlist playlistVideos={playlist}/>
         </div>
