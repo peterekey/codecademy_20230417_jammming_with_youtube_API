@@ -2,10 +2,6 @@ import './styles.css'
 
 export function Track(props) {
 
-    function addToPlaylist(theVid) {
-
-    }
-
     return (
         <div className="Track-card-container">
             <div>

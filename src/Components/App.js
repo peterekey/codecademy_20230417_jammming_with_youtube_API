@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { SearchResults } from './SearchResults'
 import { SearchBar } from './SearchBar'
 import { Playlist } from './Playlist'
@@ -28,31 +28,34 @@ function App() {
   const responseData = getDataFromResponse(sampleResponse)
 
   const [playlist, setPlaylist] = useState([])
-  const [newVideo, setNewVideo] = useState({})
+  const [newVideo, setNewVideo] = useState(null)
 
-  const handlePlaylistChange = ({channelTitle, thumbnail, videoLink, videoTitle}) => {
-    setNewVideo((prev) => ({
-      ...prev,
-      channelTitle: channelTitle,
-      thumbnail: thumbnail,
-      videoTitle: videoTitle,
-      videoLink: videoLink
-    }))
-  }
+  const isFirstRender = useRef(true)
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    if (isFirstRender.current) {
+      console.log('First render playlist is ' + JSON.stringify(playlist))
+      isFirstRender.current = false
+    } else {
+      setPlaylist((playlist) => (      
+        [...playlist, newVideo]
+      ))
+      console.log('Subsequent render playlist is ' + JSON.stringify(playlist))
+    }
+  }, [newVideo])
 
-    setPlaylist((playlist) => (
-      [newVideo, ...playlist]
-    ))
 
-    setNewVideo(() => ({
-      channelTitle: '',
-      thumbnail: '',
-      videoTitle: '',
-      videoLink: ''
-    }))
+  const handlePlaylistChange = (video) => {
+    
+    setNewVideo(prevNewVideo => {
+      return {
+        ...prevNewVideo,
+        channelTitle: video.channelTitle,
+        thumbnail: video.thumbnail,
+        videoTitle: video.videoTitle,
+        videoLink: video.videoLink
+      }})
+
   }
 
   return (
