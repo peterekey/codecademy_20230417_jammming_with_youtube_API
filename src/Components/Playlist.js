@@ -1,19 +1,14 @@
 import { Track } from './Track'
 
-export function Playlist({playlistVideos}) {
-
-    // const thePlaylist = {playlistVideos}
-
-    // useEffect(() => {
-
-    // })
+export function Playlist(props) {
 
     const cards = []
 
-    playlistVideos.map(video => {
+    props.playlistVideos.map(video => {
         cards.push(
             <Track 
                 video={video}
+                removeFromPlaylist={props.removeFromPlaylist}
             />
         )
     })
@@ -23,8 +18,7 @@ export function Playlist({playlistVideos}) {
             <h2>
                 <input type="text" placeholder="New playlist" className="Playlist-input"></input>
             </h2>
-            {console.log(playlistVideos.length > 0)}
-            {playlistVideos.length === 0 ? 'Add a video to playlist...' : cards}
+            {props.playlistVideos.length === 0 ? 'Add a video to playlist...' : cards}
         </div>
     )
 }

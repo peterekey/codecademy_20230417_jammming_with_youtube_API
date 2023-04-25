@@ -34,26 +34,32 @@ function App() {
 
   useEffect(() => {
     if (isFirstRender.current) {
-      console.log('First render playlist is ' + JSON.stringify(playlist))
       isFirstRender.current = false
     } else {
       setPlaylist((playlist) => (      
         [...playlist, newVideo]
       ))
-      console.log('Subsequent render playlist is ' + JSON.stringify(playlist))
     }
   }, [newVideo])
 
+  const handleDelete = (videoToDelete) => {
 
-  const handlePlaylistChange = (video) => {
+    console.log(`Before running handleDelete, playlist is ${JSON.stringify(playlist)}`)
+    const indexToRemove = playlist.findIndex(video => video.videoLink === videoToDelete.videoLink)
+
+    setPlaylist(playlist.filter((video, index) => index != indexToRemove))
+    console.log(`After running handleDelete, playlist is ${JSON.stringify(playlist)}`)
+  }
+
+  const handlePlaylistChange = (videoToAdd) => {
     
     setNewVideo(prevNewVideo => {
       return {
         ...prevNewVideo,
-        channelTitle: video.channelTitle,
-        thumbnail: video.thumbnail,
-        videoTitle: video.videoTitle,
-        videoLink: video.videoLink
+        channelTitle: videoToAdd.channelTitle,
+        thumbnail: videoToAdd.thumbnail,
+        videoTitle: videoToAdd.videoTitle,
+        videoLink: videoToAdd.videoLink
       }})
 
   }
@@ -70,7 +76,10 @@ function App() {
             responseObject={responseData} 
             handlePlaylistChange={handlePlaylistChange}
           />
-          <Playlist playlistVideos={playlist}/>
+          <Playlist 
+            playlistVideos={playlist}
+            removeFromPlaylist={handleDelete}
+          />
         </div>
       </main>
       <footer className="App-footer">

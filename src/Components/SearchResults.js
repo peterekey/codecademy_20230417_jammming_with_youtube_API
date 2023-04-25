@@ -1,5 +1,4 @@
 import { Tracklist } from './Tracklist'
-import { Track } from './Track'
 import './styles.css'
 
 export function SearchResults(props) {
