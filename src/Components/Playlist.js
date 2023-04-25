@@ -16,7 +16,11 @@ export function Playlist(props) {
     return (
         <div className="column-container">
             <h2>
-                <input type="text" placeholder="New playlist" className="Playlist-input"></input>
+                <input type="text" placeholder="New playlist" className="Playlist-input"/>
+                &nbsp;
+                <button className="submit-button">
+                    Save playlist
+                </button>
             </h2>
             {props.playlistVideos.length === 0 ? 'Add a video to playlist...' : cards}
         </div>

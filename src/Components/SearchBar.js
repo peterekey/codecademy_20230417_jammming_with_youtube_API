@@ -17,11 +17,12 @@ export function SearchBar() {
                 placeholder="Search for a YouTube video..." 
                 onChange={handleChange}/>
 
-            <input 
-                type="submit"
+            <button 
                 className="submit-button"
-                value="Search YouTube"
-            />
+                onClick=""
+            >
+                Search YouTube
+            </button>
         </div>
         )
 }
