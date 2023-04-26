@@ -2,7 +2,11 @@ import './styles.css'
 
 export function Track(props) {
 
-
+    const renderText = (html) => {
+        const text = document.createElement("span")
+        text.innerHTML = html
+        return text.innerText
+    }
 
     return (
         <div className="Track-card-container">
@@ -10,7 +14,7 @@ export function Track(props) {
                 <a href={"http://www.youtube.com/watch?v=" + props.video.videoLink} target="_blank"><img src={props.video.thumbnail} /></a>
             </div>
             <div className="Track-card-info">
-                <h3><a href={"http://www.youtube.com/watch?v=" + props.video.videoLink} target="_blank">{props.video.videoTitle}</a></h3>
+                <h3><a href={"http://www.youtube.com/watch?v=" + props.video.videoLink} target="_blank">{renderText(props.video.videoTitle)}</a></h3>
                 <h4>{props.video.channelTitle}</h4>
             </div>
             <div className="Track-card-info">
