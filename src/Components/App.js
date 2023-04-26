@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { SearchResults } from './SearchResults'
 import { SearchBar } from './SearchBar'
 import { Playlist } from './Playlist'
-import sampleResponse from '../Assets/sampleResponse.json'
 
 function App() {
 
@@ -25,10 +24,49 @@ function App() {
     return results
   }
 
-  const responseData = getDataFromResponse(sampleResponse)
+  const submitSearch = async () => {
+    
+    if (!searchInput) {
+      return alert('You need to type something in the search box!')
+    }
 
+    console.log(searchInput)
+    console.log(process.env.REACT_APP_SECRET_KEY)
+
+    const query = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key=${process.env.REACT_APP_SECRET_KEY}&q=${searchInput}`
+    console.log(query)
+    
+    const response = await fetch(query)
+
+    if (!response.ok) {
+      const message = `An error has okurrred: ${response.status}`
+      console.log(message)
+      throw new Error(message)
+    }
+
+    console.log(response)
+
+    const videos = await response.json()
+    console.log(videos)
+
+    setResponseData(getDataFromResponse(videos))
+    
+    return
+  }
+
+  const submitPlaylist = () => {
+    console.log('Clicked submit playlist')
+  }
+
+  const [searchInput, setSearchInput] = useState('')
   const [playlist, setPlaylist] = useState([])
   const [newVideo, setNewVideo] = useState(null)
+  const [playlistName, setPlaylistName] = useState('')
+  const [responseData, setResponseData] = useState('')
+
+  const handleSearchInput = ({target}) => {
+    setSearchInput(target.value)
+  }
 
   const isFirstRender = useRef(true)
 
@@ -64,13 +102,20 @@ function App() {
 
   }
 
+  const handlePlaylistNameChange = ({target}) => {
+    setPlaylistName(target.value)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Jammming: YouTube</h1>
       </header>
       <main>
-        <SearchBar />
+        <SearchBar 
+          submitSearch={submitSearch}
+          handleSearchInput={handleSearchInput}
+        />
         <div className="App-body">
           <SearchResults 
             responseObject={responseData} 
@@ -79,6 +124,9 @@ function App() {
           <Playlist 
             playlistVideos={playlist}
             removeFromPlaylist={handleDelete}
+            handlePlaylistNameChange={handlePlaylistNameChange}
+            handleSearchInput={handleSearchInput}
+            submitPlaylist={submitPlaylist}
           />
         </div>
       </main>

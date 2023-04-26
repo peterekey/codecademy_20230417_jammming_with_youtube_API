@@ -1,13 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-export function SearchBar() {
+export function SearchBar(props) {
 
-    const [searchInput, setSearchInput] = useState('')
-
-    const handleChange = ({target}) => {
-        setSearchInput(target.value)
-        console.log(target.value)
-    }
 
     return (
         <div className="Searchbar-container">
@@ -15,11 +9,12 @@ export function SearchBar() {
                 text="text"
                 className="Searchbar-input"
                 placeholder="Search for a YouTube video..." 
-                onChange={handleChange}/>
+                onChange={props.handleSearchInput}
+            />
 
             <button 
                 className="submit-button"
-                onClick=""
+                onClick={props.submitSearch}
             >
                 Search YouTube
             </button>

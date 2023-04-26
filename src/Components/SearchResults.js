@@ -7,10 +7,10 @@ export function SearchResults(props) {
         <div className="column-container">
             <h2>Results</h2>
             <div className="SearchResults-container">
-                <Tracklist 
+                {props.responseObject.length === 0 ? 'Search for a video to begin' : <Tracklist 
                     videos={props.responseObject}
                     handlePlaylistChange={props.handlePlaylistChange}
-                />
+                />}
             </div>
         </div>
     )
